@@ -1,9 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { API_QUERY_KEYS } from "@/constants/api";
 import { type ApiResponse, apiClient } from "@/lib/api-client";
 import type {
   ConversationHistory,
   ConversationList,
+  TaskCardItem,
 } from "@/types/conversation";
 
 export const useGetConversationList = () => {
@@ -37,7 +38,26 @@ export const usePollTaskList = (conversationId: string) => {
         `/conversations/${conversationId}/scheduled-task-results`,
       ),
     select: (data) => data.data.items,
-    refetchInterval: 30 * 1000,
+    refetchInterval: 60 * 1000,
     enabled: !!conversationId,
+  });
+};
+
+export const useAllPollTaskList = () => {
+  return useQuery({
+    queryKey: API_QUERY_KEYS.CONVERSATION.allConversationTaskList,
+    queryFn: () =>
+      apiClient.get<ApiResponse<{ agents: TaskCardItem[] }>>(
+        `/conversations/scheduled-task-results`,
+      ),
+    select: (data) => data.data.agents,
+    refetchInterval: 60 * 1000,
+  });
+};
+
+export const useCancelTask = () => {
+  return useMutation({
+    mutationFn: (task_id: string) =>
+      apiClient.post<ApiResponse<null>>(`/tasks/${task_id}/cancel`),
   });
 };

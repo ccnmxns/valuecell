@@ -186,14 +186,15 @@ class SQLiteItemStore(ItemStore):
             )
             await db.commit()
 
+    # TODO: consider pagination by agent_name
     async def get_items(
         self,
         conversation_id: Optional[str] = None,
-        limit: Optional[int] = None,
-        offset: int = 0,
         role: Optional[Role] = None,
         event: Optional[ConversationItemEvent] = None,
         component_type: Optional[str] = None,
+        limit: Optional[int] = None,
+        offset: int = 0,
         **kwargs,
     ) -> List[ConversationItem]:
         await self._ensure_initialized()
