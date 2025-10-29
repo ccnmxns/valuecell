@@ -7,6 +7,7 @@
     "dev": "react-router dev",
     "build": "react-router build",
     "start": "vite preview --outDir build/client",
+    "build-prod": "vite build",
     "typecheck": "react-router typegen && tsc",
     "lint": "biome lint --diagnostic-level=error ./src",
     "lint:fix": "biome lint --write ./src",
