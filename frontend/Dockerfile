@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json /app/package.json
 
 RUN bun install
-RUN npm run build
+RUN npm build
 EXPOSE 4173
 
-CMD [ "npm", "run", "start" ]
+CMD [ "bun", "start" ]
