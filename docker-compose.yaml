@@ -1,0 +1,23 @@
+services:
+  frontend:
+    build: 
+      context: ./frontend
+    ports:
+      - "8080:4173"
+    networks:
+      - valuecell-net
+    env_file:
+      - .env
+  backend:
+    build:
+      context: ./python
+    ports:
+      - "8000:8000"
+    networks:
+      - valuecell-net
+    env_file:
+      - .env
+      
+networks:
+  valuecell-net:
+    
