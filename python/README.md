@@ -55,3 +55,4 @@ uv venv --python 3.12 && uv sync && uv pip list
 
 - Python >= 3.12
 - Dependencies managed via `pyproject.toml`
+
