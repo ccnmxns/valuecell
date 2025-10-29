@@ -6,7 +6,7 @@ COPY package.json /app/package.json
 
 RUN bun install
 
-COPY frontend/build/client /app/
+COPY ./build/client /app/
 
 RUN bun run build
 EXPOSE 4173
